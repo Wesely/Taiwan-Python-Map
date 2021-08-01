@@ -19,8 +19,7 @@ Python 台灣行政區地圖 (2021)
 ## Output
 |台灣全島|台北附近|
 |--|--|
-![image](https://user-images.githubusercontent.com/5109822/127766998-798e882a-9182-4152-a9b1-2f0711ea38bf.png)
-![image](https://user-images.githubusercontent.com/5109822/127767050-660213fd-dae6-468b-ad06-3e6998d67197.png)
+| ![image](https://user-images.githubusercontent.com/5109822/127766998-798e882a-9182-4152-a9b1-2f0711ea38bf.png) | ![image](https://user-images.githubusercontent.com/5109822/127767050-660213fd-dae6-468b-ad06-3e6998d67197.png) |
 
 
 # Requirements 
