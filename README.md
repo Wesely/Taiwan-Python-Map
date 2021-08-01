@@ -1,8 +1,17 @@
 Python 台灣行政區地圖 (2021)
-以 python 讀取政府開放平台的 ShapeFile 368 行政區資訊：
-> 鄉鎮市區界線(TWD97經緯度) | 政府資料開放平臺: https://data.gov.tw/dataset/7441
+以 python 讀取政府開放平台的 ShapeFile 地圖資訊。歡迎引用或是協作
   
-往上另有縣市資訊，往下有村里資訊，都是shf檔案可以自行到政府開放平台下載
+另有縣市資訊、村里資訊與各種行政地圖資訊 例如：
+- 直轄市、縣市界線(TWD97經緯度)
+- 鄉鎮市區界線(TWD97經緯度) | 政府資料開放平臺: https://data.gov.tw/dataset/7441
+- 村里界歷史圖資(TWD97經緯度)
+- 比例尺十萬分之一參考索引圖框_TWD97經緯度
+
+都是一樣選擇下載 SHP格式 的檔案，然後參照 `render_script.py` 的內容即可
+
+對於 SHP格式 shapefile其他欄位的讀取，請參考 `unused_functions.py` 或是 References 內的網站
+![image](https://user-images.githubusercontent.com/5109822/127767144-42a9af5c-8386-4abc-ab97-92b5b9d53f9a.png)
+
 
 ## Output
 ![image](https://user-images.githubusercontent.com/5109822/127766998-798e882a-9182-4152-a9b1-2f0711ea38bf.png)
