@@ -12,7 +12,7 @@ Python 台灣行政區地圖 (2021)
 
 都是一樣選擇下載 SHP格式 的檔案，然後參照 `render_script.py` 的內容即可
 
-對於 SHP格式 shapefile其他欄位的讀取，請參考 `unused_functions.py` 或是 References 內的網站
+對於 SHP 格式 shapefile其他欄位的讀取，請參考 `unused_functions.py` 或是 References 內的網站
 ![image](https://user-images.githubusercontent.com/5109822/127767144-42a9af5c-8386-4abc-ab97-92b5b9d53f9a.png)
 
 
@@ -39,7 +39,7 @@ https://pyecontech.com/2020/03/27/python_matplotlib_chinese/
 
 ______
 
-由於政府提供的地圖檔案是 `.sfh` shapefile. 我們需要安裝 `pandas` 來讀取
+由於政府提供的地圖檔案是 `.sp` shapefile. 我們需要安裝 `pandas` 來讀取
 
 ```py
 shp_path = './mapdata202104280245/TOWN_MOI_1100415.shp'
@@ -53,7 +53,6 @@ sf = shp.Reader(shp_path)
     def shapeRecord(self, i=0):
         """Returns a combination geometry and attribute record for the
         supplied record index."""
-        i = self.__restrictIndex(i)
         return ShapeRecord(shape=self.shape(i), record=self.record(i))
 
     def shapeRecords(self):
@@ -94,10 +93,11 @@ Record #-1: ['V02', '10014020', '臺東縣', '成功鎮', 'Chenggong Township', 
 ![放大 奇怪的線](https://user-images.githubusercontent.com/5109822/127766775-cbea6219-c6d2-46db-b2e8-8b61354e1629.png)
 
 再放大
-![放到最大 奇怪的線](https://user-images.githubusercontent.com/5109822/127766779-656931e2-707e-4e06-afb6-5a2cdf87fccf.png)
-![澎湖連線](https://user-images.githubusercontent.com/5109822/127766783-f517c190-43d4-445e-91c0-e93654046e01.png)
+|西北小島|澎湖群島|
+|--|--|
+| ![放到最大 奇怪的線](https://user-images.githubusercontent.com/5109822/127766779-656931e2-707e-4e06-afb6-5a2cdf87fccf.png) | ![澎湖連線](https://user-images.githubusercontent.com/5109822/127766783-f517c190-43d4-445e-91c0-e93654046e01.png) |
 
-會發現，其實原始資料並沒有把每一個countour獨立成一個list，於是每個行政區都一筆畫完成，導致島嶼之間有一條線。
+會發現，其實原始資料並沒有把每一個contour獨立成一個list，於是每個行政區都一筆畫完成，導致島嶼之間有一條線。
 所以程式碼中插入了這段：
 
 ```py
