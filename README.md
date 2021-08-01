@@ -1,3 +1,13 @@
+Python 台灣行政區地圖 (2021)
+以 python 讀取政府開放平台的 ShapeFile 368 行政區資訊：
+> 鄉鎮市區界線(TWD97經緯度) | 政府資料開放平臺: https://data.gov.tw/dataset/7441
+  
+往上另有縣市資訊，往下有村里資訊，都是shf檔案可以自行到政府開放平台下載
+
+## Output
+![image](https://user-images.githubusercontent.com/5109822/127766998-798e882a-9182-4152-a9b1-2f0711ea38bf.png)
+![image](https://user-images.githubusercontent.com/5109822/127767050-660213fd-dae6-468b-ad06-3e6998d67197.png)
+
 
 # Requirements 
 ```
@@ -5,7 +15,7 @@ pip install pyshp
 pip install pandas
 pip install seaborn
 ```
-(also, numpy + matplotlib)
+以及 numpy + matplotlib
 
 # References
 1. Mapping Geograph Data in Python
@@ -51,10 +61,8 @@ Record #-1: ['V02', '10014020', '臺東縣', '成功鎮', 'Chenggong Township', 
 ```
 
 這就是我們畫地圖需要的全部資訊了。
-
-那V是什麼意思？
 更加詳細的定義可以參考第一個reference （實作參考 `not_used_functions.py`)
-可以看到 
+可以看到上述欄位含義如下
 ```
     TOWNID  TOWNCODE COUNTYNAME TOWNNAME            TOWNENG COUNTYID COUNTYCODE                                             coords
 68     N18  10007160        彰化縣      永靖鄉  Yongjing Township        N      10007  [(120.57537662200002, 23.93329744600004), (120...
@@ -65,17 +73,22 @@ Record #-1: ['V02', '10014020', '臺東縣', '成功鎮', 'Chenggong Township', 
 
 ```
 
-那是一個 countyCode ，不太確定用途。
-
 # Plot
 
 畫圖的時候把 x,y 座標的 list 讀取出來，但會發現有很多奇妙的線。
-放大
-再放大
-會發現，其實原始資料並沒有把每一個countour獨立成一個list，會導致每個行政區都一筆畫完成。
-所以程式碼中插入了這段
+![奇怪的線](https://user-images.githubusercontent.com/5109822/127766772-6c3bf7f6-86ab-42e2-839e-a19294389ef7.png)
 
-```
+放大
+![放大 奇怪的線](https://user-images.githubusercontent.com/5109822/127766775-cbea6219-c6d2-46db-b2e8-8b61354e1629.png)
+
+再放大
+![放到最大 奇怪的線](https://user-images.githubusercontent.com/5109822/127766779-656931e2-707e-4e06-afb6-5a2cdf87fccf.png)
+![澎湖連線](https://user-images.githubusercontent.com/5109822/127766783-f517c190-43d4-445e-91c0-e93654046e01.png)
+
+會發現，其實原始資料並沒有把每一個countour獨立成一個list，於是每個行政區都一筆畫完成，導致島嶼之間有一條線。
+所以程式碼中插入了這段：
+
+```py
     points = list(zip(x,y))
     visited = set()
     xx = []
@@ -91,4 +104,9 @@ Record #-1: ['V02', '10014020', '臺東縣', '成功鎮', 'Chenggong Township', 
             visited.add(p)
 ```
 把原始的 x,y list 先存起來。遇到重複的點的時候也就是畫了一整圈的時候，才一次 plot 出來。
-再調整一下字體位置，這樣就完成了。
+再調整一下字體位置，但由於字體目前放在「重心」的位置附近，有時候可能會導致文字出界。
+例如行政區左側曲線使用了100個座標點而右側只用了10個的話，會導致座標嚴重偏左。
+只好日後再來處理了。
+
+![修正中文字體位置](https://user-images.githubusercontent.com/5109822/127766799-039d4fba-ad3a-4fbd-b0b7-4abbb3b3b04b.png)
+
