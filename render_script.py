@@ -66,9 +66,13 @@ def plot_map(sf, x_lim = None, y_lim = None, figsize = (9,7)):
 
 
 """
-Download zh-tw chinese font to
->>> import matplotlib
->>> print(matplotlib.__file__)
+選擇中文字型，另外開啟terminal執行：
+$fc-list :lang=zh-tw
+
+比方說我看到： 
+/System/Library/AssetsV2/com_apple_MobileAsset_Font7/3a9dbc8ddc8b85f43055a28fb5d551e905d43de2.asset/AssetData/LiHeiPro.ttf: LiHei Pro:style=Medium,中黑,Halbfett,Normaali,Moyen,Medio,ミディアム,중간체,Médio,Средний,Normal,中等,Media
+
+我就在下面把字體設為 LiHei Pro 
 """
-plt.rcParams['font.sans-serif'] = ['Noto Sans CJK TC']
+plt.rcParams['font.sans-serif'] = ['LiHei Pro']
 plot_map(sf)
